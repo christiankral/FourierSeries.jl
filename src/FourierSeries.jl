@@ -90,7 +90,7 @@ module FourierSeries
         end
         # Calculate superposition
         for k in kRange
-            u = u + c[k+1]*exp.(1im*k*t*2*pi/T)
+            u = u + real(c[k+1]*exp.(1im*k*t*2*pi/T))
         end
         return (t,u)
     end
