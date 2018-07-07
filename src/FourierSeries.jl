@@ -2,7 +2,9 @@ module FourierSeries
 
     export fourierSeriesStep,
         fourierSeriesSampled,
-        fourierSeriesSynthesis
+        fourierSeriesSynthesis,
+        fourierComplexToReal,
+        fourierRealToComplex
 
     function fourierSeriesStep(t,u,hMax)
         # Check if t and have equal lengths
@@ -91,5 +93,13 @@ module FourierSeries
             u = u + c[k+1]*exp.(1im*k*t*2*pi/T)
         end
         return (t,u)
+    end
+
+    function fourierComplexToReal(c)
+        return (real(c),-imag(c))
+    end
+
+    function fourierRealToComplex(a,b)
+        return a-1im*b
     end
 end

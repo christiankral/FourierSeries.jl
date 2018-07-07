@@ -29,3 +29,9 @@ The module FourierSeries.jl has to be loaded by `using FourierSeries`.
 # Synthesis Functions
 
 - `fourierSeriesSynthesis(f,c,hMax,N)` This function synthesizes the time domain function from the frequency vector and complex value sFourier coefficients
+
+# Conversion Functions
+
+- `fourierComplexToReal(c)` Convert complex Fourier coefficients to real Fourier coefficients
+
+- `fourierRealToComplex(a,b)` Convert real Fourier coefficients to complex Fourier coefficients
