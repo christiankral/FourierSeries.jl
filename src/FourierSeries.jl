@@ -2,7 +2,7 @@ module FourierSeries
 
     export fourierSeriesStepReal,
         fourierSeriesStepComplex,
-        fourierSeriesDiscrete,
+        fourierSeriesSampled,
         fourierSeriesSynthesisReal,
         fourierSeriesSynthesisComplex
 
