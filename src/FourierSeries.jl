@@ -9,12 +9,12 @@ module FourierSeries
     function fourierSeriesStepReal(t,u,hMax)
         # Check if t and have equal lengths
         if length(t)!=length(u)
-            error("module FourierSeries: function fourierSeriesSynthesisReal:\n
+            error("module FourierSeries: function fourierSeriesStepReal:\n
     Vectors t and u have different lengths")
         end
         # Check if vector u is NOT of type Complex
         if u[1] isa Complex
-            error("module FourierSeries: function fourierSeriesSynthesisReal:\n
+            error("module FourierSeries: function fourierSeriesStepReal:\n
     The analyzed functions `u` must not be of Type ::Complex")
         end
         # Determine length of function u
@@ -43,12 +43,12 @@ module FourierSeries
     function fourierSeriesStepComplex(t,u,hMax)
         # Check if t and have equal lengths
         if length(t)!=length(u)
-            error("module FourierSeries: function fourierSeriesSynthesisComplex:\n
+            error("module FourierSeries: function fourierSeriesStepComplex:\n
     Vectors t and u have different lengths")
         end
         # Check if vector u is NOT of type Complex
         if u[1] isa Complex
-            error("module FourierSeries: function fourierSeriesSynthesisReal:\n
+            error("module FourierSeries: function fourierSeriesStepComplex:\n
     The analyzed functions `u` must not be of Type ::Complex")
         end
         # Determine length of function u
@@ -73,7 +73,7 @@ module FourierSeries
     function fourierSeriesSampled(t,u,hMax::Int64=typemax(Int64))
         # Check if vector u is NOT of type Complex
         if u[1] isa Complex
-            error("module FourierSeries: function fourierSeriesSynthesisReal:\n
+            error("module FourierSeries: function fourierSeriesSampled:\n
     The analyzed functions `u` must not be of Type ::Complex")
         end
         # Determine length of function u
