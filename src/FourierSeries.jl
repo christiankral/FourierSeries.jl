@@ -142,7 +142,7 @@ module FourierSeries
         # Determine Period of synthesized function
         T = 1/f[2]
         # Initialization of synthesis function f
-        u=fill(a[1],N)
+        u=fill(c[1],N)
         # Indices of synthesis function
         t=collect(0:N-1)/N*T
         # hMax may either be a scalar of vector
