@@ -152,9 +152,9 @@ module FourierSeries
             kRange = hMax
         else
             # If hMax is a scalar, then treat hMax as the maximum harmonic number,
-            # which may not exceed length(a)-1, as a[1] equals the dc component
-            # (harmonic 0) and a[hMax-1] represents h number hMax
-            kRange = collect(1:min(hMax,length(a)-1))
+            # which may not exceed length(c)-1, as c[1] equals the dc component
+            # (harmonic 0) and c[hMax-1] represents h number hMax
+            kRange = collect(1:min(hMax,length(c)-1))
         end
         # Calculate superposition
         for k in kRange
