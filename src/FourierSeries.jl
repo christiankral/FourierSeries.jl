@@ -4,7 +4,8 @@ module FourierSeries
     export
         fourierSeriesStepReal,
         fourierSeriesSampledReal,
-        fourierSeriesSynthesisReal
+        fourierSeriesSynthesisReal,
+        repeatPeriodically
 
     function fourierSeriesStepReal(t,u,T,hMax)
         # Check if t and have equal lengths
@@ -108,4 +109,26 @@ module FourierSeries
         return (t,u)
     end
 
- end
+    function repeatPeriodically(t,u,right=1)
+        # Check if vectors t and u have equal lengths
+        if length(t)!=length(u)
+            error("module Fourier: function repeatPeriodically:\n
+    Vectors t and u have different lengths")
+        end
+        # Determine length of arrays t and u
+        N = length(t)
+        # Determine period of time axis
+        T = t[end]-t[1]+t[2]-t[1]
+        # Determine how many times the vectors t and u shall be repeated
+        outer = Int(floor((right-1)/N)+1)
+        # Repeat vector t and consider period T
+        tx = repeat(t,outer=outer+1) + repeat(collect(0:outer),inner=N)*T
+        # Repeat vector u
+        ux = repeat(u,outer=outer+1)
+        # Limit output vectors by N+right elements
+        tx = tx[1:N+right]
+        ux = ux[1:N+right]
+        return (tx,ux)
+    end
+
+end
