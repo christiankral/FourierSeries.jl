@@ -75,7 +75,7 @@ module FourierSeries
         return (h,f,a,b)
     end
 
-    function fourierSeriesSynthesisReal(f,a,b,hMax=length(a)-1;N=1000,t0=0)
+    function fourierSeriesSynthesisReal(f,a,b;hMax=length(a)-1,N=1000,t0=0)
         # Check if vectors f, a and b have equal lengths
         if length(f)!=length(a)
             error("module Fourier: function fourierSeriesSynthesisReal:\n
