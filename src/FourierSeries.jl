@@ -75,7 +75,7 @@ module FourierSeries
         return (h,f,a,b)
     end
 
-    function fourierSeriesSynthesisReal(f,a,b;hMax=length(a)-1,N=1000)
+    function fourierSeriesSynthesisReal(f,a,b,hMax=length(a)-1,N=1000,t0=0)
         # Check if vectors f, a and b have equal lengths
         if length(f)!=length(a)
             error("module Fourier: function fourierSeriesSynthesisReal:\n
@@ -89,17 +89,18 @@ module FourierSeries
         T = 1/f[2]
         # Initialization of synthesis function f
         u=fill(a[1],N)
-        # Indices of synthesis function
-        t=collect(0:N-1)/N*T
+        # time samples of synthesis function, considering start time t0
+        t=collect(0:N-1)/N*T+fill(t0,N)
         # hMax may either be a scalar of vector
         if hMax isa Array
-            # If hMax is an array, then synthesize only harmonic numbers indicated by
-            # hMax
+            # If hMax is an array, then synthesize only harmonic numbers
+            # indicated by hMax
             kRange = hMax
         else
-            # If hMax is a scalar, then treat hMax as the maximum harmonic number,
-            # which may not exceed length(a)-1, as a[1] equals the dc component
-            # (harmonic 0) and a[hMax-1] represents harmonic number hMax
+            # If hMax is a scalar, then treat hMax as the maximum harmonic
+            # number, which may not exceed length(a)-1, as a[1] equals the dc
+            # component (harmonic 0) and a[hMax-1] represents harmonic number
+            # hMax
             kRange = collect(1:min(hMax,length(a)-1))
         end
         # Calculate superosition
