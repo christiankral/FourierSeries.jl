@@ -26,7 +26,7 @@ module FourierSeries
         # Cycle through loop to determine coefficients
         i=collect(1:N)
         # Time vector, extended by period T
-        τ=cat(1,t,[T])
+        τ=cat(1,t,[T+t[1]])
         # DC value
         a[1]=sum(u.*(τ[i+1]-τ[i]))/T
         b[1]=0
