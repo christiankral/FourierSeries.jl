@@ -1,45 +1,50 @@
 module FourierSeries
 
-    export fourierSeriesStep,
-        fourierSeriesSampled,
-        fourierSeriesSynthesis,
-        fourierComplexToReal,
-        fourierRealToComplex
+    export
+        fourierSeriesStepReal,
+        fourierSeriesSampledReal,
+        fourierSeriesSynthesisReal
 
-    function fourierSeriesStep(t,u,hMax)
+    function fourierSeriesStepReal(t,u,T,hMax)
         # Check if t and have equal lengths
         if length(t)!=length(u)
-            error("module FourierSeries: function fourierSeriesStep:\n
+            error("module FourierSeries: function fourierSeriesStepReal:\n
     Vectors t and u have different lengths")
         end
         # Check if vector u is NOT of type Complex
         if u[1] isa Complex
-            error("module FourierSeries: function fourierSeriesStep:\n
+            error("module FourierSeries: function fourierSeriesStepReal:\n
     The analyzed functions `u` must not be of Type ::Complex")
         end
         # Determine length of function u
-        N=length(u)
-        # Determine period of function u
-        T = t[end]-t[1]+t[2]-t[1]
-        # Initialization of complex result vectors
-        c=1im*zeros(hMax+1)
+        N = length(u)
+        # Initialization of real result vectors
+        a=zeros(hMax+1)
+        b=zeros(hMax+1)
         # Cycle through loop to determine coefficients
         i=collect(1:N)
-        c[1]=sum(u)/(2*pi)
+        # Time vector, extended by period T
+        τ=cat(1,t,[T])
+        # DC value
+        a[1]=sum(u.*(τ[i+1]-τ[i]))/T
+        b[1]=0
         for k in collect(1:hMax)
-            c[k+1]=sum(u.*(-exp.(-1im*k*i*2*pi/N)+exp.(-1im*k*(i-1)*2*pi/N)))/(1im*k*pi)
+            a[k+1]=sum(u.*(+sin.(k*τ[i+1]*2*pi/T)
+                           -sin.(k*τ[i]*2*pi/T)))/(k*pi)
+            b[k+1]=sum(u.*(-cos.(k*τ[i+1]*2*pi/T)
+                           +cos.(k*τ[i]*2*pi/T)))/(k*pi)
         end
         # Number of harmonics
         h = collect(0:hMax)
         # Frequencies
         f = h/T
-        return (h,f,c)
+        return (h,f,a,b)
     end
 
-    function fourierSeriesSampled(t,u,hMax::Int64=typemax(Int64))
+    function fourierSeriesSampledReal(t,u,hMax::Int64=typemax(Int64))
         # Check if vector u is NOT of type Complex
         if u[1] isa Complex
-            error("module FourierSeries: function fourierSeriesSampled:\n
+            error("module FourierSeries: function fourierSeriesSampledReal:\n
     The analyzed functions `u` must not be of Type ::Complex")
         end
         # Determine length of function u
@@ -61,20 +66,27 @@ module FourierSeries
         h = collect(0:hMaxMax)
         # Frequencies
         f = h/T
-        # Limit output
-        return (h,f,c[1:min(hMax,hMaxMax)+1]);
+        # Real and imaginary coefficients
+        a = +real(c[1:min(hMax,hMaxMax)+1])
+        b = -imag(c[1:min(hMax,hMaxMax)+1])
+        # Return vectors
+        return (h,f,a,b)
     end
 
-    function fourierSeriesSynthesis(f,c;hMax=length(c)-1,N=1000)
-        # Check if vectors f and c have equal lengths
-        if length(f)!=length(c)
-            error("module Fourier: function fourierSeriesSynthesis:\n
-    Vectors f and c have different lengths")
+    function fourierSeriesSynthesisReal(f,a,b;hMax=length(a)-1,N=1000)
+        # Check if vectors f, a and b have equal lengths
+        if length(f)!=length(a)
+            error("module Fourier: function fourierSeriesSynthesisReal:\n
+    Vectors f and a have different lengths")
+        end
+        if length(a)!=length(b)
+            error("module Fourier: function fourierSeriesSynthesisReal:\n
+    Vectors a and b have different lengths")
         end
         # Determine Period of synthesized function
         T = 1/f[2]
         # Initialization of synthesis function f
-        u=fill(real(c[1]),N)
+        u=fill(a[1],N)
         # Indices of synthesis function
         t=collect(0:N-1)/N*T
         # hMax may either be a scalar of vector
@@ -84,22 +96,15 @@ module FourierSeries
             kRange = hMax
         else
             # If hMax is a scalar, then treat hMax as the maximum harmonic number,
-            # which may not exceed length(c)-1, as c[1] equals the dc component
-            # (harmonic 0) and c[hMax-1] represents h number hMax
-            kRange = collect(1:min(hMax,length(c)-1))
+            # which may not exceed length(a)-1, as a[1] equals the dc component
+            # (harmonic 0) and a[hMax-1] represents harmonic number hMax
+            kRange = collect(1:min(hMax,length(a)-1))
         end
-        # Calculate superposition
+        # Calculate superosition
         for k in kRange
-            u = u + real(c[k+1]*exp.(1im*k*t*2*pi/T))
+            u = u + a[k+1]*cos.(k*t*2*pi/T) + b[k+1]*sin.(k*t*2*pi/T)
         end
         return (t,u)
     end
 
-    function fourierComplexToReal(c)
-        return (real(c),-imag(c))
-    end
-
-    function fourierRealToComplex(a,b)
-        return a-1im*b
-    end
-end
+ end

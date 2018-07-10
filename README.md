@@ -22,16 +22,10 @@ The module FourierSeries.jl has to be loaded by `using FourierSeries`.
 
 # Analysis Functions
 
-- `fourierSeriesStep(t,u,hMax)` This function determines the complex value Fourier coefficients of a piecewise constant time domain function u(t)
+- `fourierSeriesStepReal(t,u,hMax)` This function determines the real value Fourier coefficients of a piecewise constant time domain function u(t)
 
-- `fourierSeriesSampled(t,u,hMax)` This function determines the complex value Fourier coefficients of a sampled time domain function u(t)
+- `fourierSeriesSampledReal(t,u,hMax)` This function determines the real value Fourier coefficients of a sampled time domain function u(t)
 
 # Synthesis Functions
 
-- `fourierSeriesSynthesis(f,c,hMax,N)` This function synthesizes the time domain function from the frequency vector and complex value sFourier coefficients
-
-# Conversion Functions
-
-- `fourierComplexToReal(c)` Convert complex Fourier coefficients to real Fourier coefficients
-
-- `fourierRealToComplex(a,b)` Convert real Fourier coefficients to complex Fourier coefficients
+- `fourierSeriesSynthesisReal(f,a,b,hMax,N)` This function synthesizes the time domain function from the frequency vector and real value Fourier coefficients `a` and `b`
