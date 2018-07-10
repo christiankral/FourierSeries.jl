@@ -110,7 +110,7 @@ module FourierSeries
         return (t,u)
     end
 
-    function repeatPeriodically(t,u,right=1)
+    function repeatPeriodically(t,u;left=0,right=1)
         # Check if vectors t and u have equal lengths
         if length(t)!=length(u)
             error("module Fourier: function repeatPeriodically:\n
@@ -121,14 +121,16 @@ module FourierSeries
         # Determine period of time axis
         T = t[end]-t[1]+t[2]-t[1]
         # Determine how many times the vectors t and u shall be repeated
-        outer = Int(floor((right-1)/N)+1)
-        # Repeat vector t and consider period T
-        tx = repeat(t,outer=outer+1) + repeat(collect(0:outer),inner=N)*T
-        # Repeat vector u
-        ux = repeat(u,outer=outer+1)
-        # Limit output vectors by N+right elements
-        tx = tx[1:N+right]
-        ux = ux[1:N+right]
+        outerRight = Int(floor((right-1)/N)+1)
+        outerLeft  = Int(floor((left -1)/N)+1)
+        # Repeat vector t by full periods and consider period T
+        tx = repeat(t,outer=outerRight+outerLeft+1) +
+             repeat(collect(-outerLeft:outerRight),inner=N)*T
+        # Repeat vector u by full periods
+        ux = repeat(u,outer=outerLeft+outerRight+1)
+        # Limit output vectors elements
+        tx = tx[outerLeft*N-left+1:(outerLeft*N)+N+right]
+        ux = ux[outerLeft*N-left+1:(outerLeft*N)+N+right]
         return (tx,ux)
     end
 
