@@ -1,0 +1,7 @@
+name = "FourierSeries"
+uuid = "91b0b092-f7f9-44d0-82ad-103031573311"
+authors = ["Christian Kral <dr.christian.kral@gmail.com>"]
+version = "0.1.0"
+
+[compat]
+julia = "≥ 1.0.0"
