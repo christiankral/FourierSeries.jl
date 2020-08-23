@@ -17,14 +17,6 @@ module FourierSeries
     Calculates the real Fourier coefficients of a step function based on the
     data pairs `t` and `u` according to the following variables
 
-    ```math
-    \mathtt{a[k]} =
-    \frac{2}{\mathtt{T}} \int_{\mathtt{t[1]}}^{\mathtt{t[1]+T}}
-    \mathtt{u(t)} \cos(k\omega \mathtt{t}) \operatorname{d}\mathtt{t} \\
-    \mathtt{b[k]} =
-    \frac{2}{\mathtt{T}} \int_{\mathtt{t[1]}}^{\mathtt{t[1]+T}}
-    \mathtt{u(t)} \sin(k\omega \mathtt{t}) \operatorname{d}\mathtt{t}
-    ```
 
     # Function arguments
 
