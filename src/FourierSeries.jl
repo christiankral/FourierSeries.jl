@@ -7,7 +7,7 @@ module FourierSeries
         fourierSeriesSynthesisReal,
         repeatPeriodically
 
-    doc"""
+    """
     # Function call
 
     `fourierSeriesStepReal(t,u,T,hMax)`
