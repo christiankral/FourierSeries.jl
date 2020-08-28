@@ -147,7 +147,7 @@ module FourierSeries
     # Fourier approximation of square wave form
     ts = [ 0; 1; 2; 3; 4; 5; 6; 7; 8; 9]    # Sampled time data
     us = [-1;-1;-1;-1;-1; 1; 1; 1; 1; 1]    # Step function of square wave
-    T = 1                       # Period
+    T = 10                      # Period
     hMax = 7                    # Maximum harmonic number
     (h,f,a,b) = fourierSeriesStepReal(ts,us,2,hMax)
     (t,u)=fourierSeriesSynthesisReal(f,a,b)
