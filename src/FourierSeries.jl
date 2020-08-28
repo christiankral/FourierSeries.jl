@@ -85,26 +85,26 @@ module FourierSeries
         # Determine length of function u
         N = length(u)
         # Initialization of real result vectors
-        a=zeros(hMax+1)
-        b=zeros(hMax+1)
+        a = zeros(hMax+1)
+        b = zeros(hMax+1)
         # Cycle through loop to determine coefficients
-        i=collect(1:N)
+        i = collect(1:N)
         # Time vector, extended by period T
-        τ=cat(t,[T+t[1]], dims = 1)
+        τ = cat(t,[T+t[1]], dims = 1)
         # DC value
-        a[1]=sum(u.*(τ[i.+1]-τ[i]))/T
-        b[1]=0
+        a[1] = sum(u.*(τ[i.+1]-τ[i]))/T
+        b[1] = 0
+        global a, b, τ, i, T
         for k in collect(1:hMax)
-            global a, b, τ, i, T
-            a[k+1]=sum(u.*(+sin.(k*τ[i.+1]*2*pi/T)
-                          .-sin.(k*τ[i]*2*pi/T)))/(k*pi)
-            b[k+1]=sum(u.*(-cos.(k*τ[i.+1]*2*pi/T)
-                          .+cos.(k*τ[i]*2*pi/T)))/(k*pi)
+            a[k+1] = sum(u.*(+sin.(k*τ[i.+1]*2*pi/T)
+                            .-sin.(k*τ[i]*2*pi/T)))/(k*pi)
+            b[k+1] = sum(u.*(-cos.(k*τ[i.+1]*2*pi/T)
+                            .+cos.(k*τ[i]*2*pi/T)))/(k*pi)
         end
         # Number of harmonics
         h = collect(0:hMax)
         # Frequencies
-        f = h/T
+        f = h / T
         return (h,f,a,b)
     end
 
@@ -150,12 +150,12 @@ module FourierSeries
     us = [-1;-1;-1;-1;-1; 1; 1; 1; 1; 1]    # Step function of square wave
     T = 10                      # Period
     hMax = 7                    # Maximum harmonic number
-    (h,f,a,b) = fourierSeriesStepReal(ts,us,2,hMax)
+    (h,f,a,b) = fourierSeriesSampledReal(ts,us,hMax)
     (t,u)=fourierSeriesSynthesisReal(f,a,b)
     using PyPlot
     # Extend (t,u) by one element to right periodically
     (tx,ux) = repeatPeriodically(ts,us,right=1)
-    step(tx,ux,where="post")    # Square wave function
+    plot(tx,ux,marker="o")    # Square wave function
     plot(t,u)                   # Fourier approximation up to hMax = 7
     ```
     """
