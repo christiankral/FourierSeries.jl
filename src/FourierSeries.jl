@@ -1,6 +1,7 @@
 __precompile__(true)
 module FourierSeries
 
+    using FFTW
     export
         fourierSeriesStepReal,
         fourierSeriesSampledReal,
