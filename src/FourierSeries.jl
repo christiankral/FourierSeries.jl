@@ -58,7 +58,7 @@ module FourierSeries
     ```julia
     # Fourier approximation of square wave form
     ts = [0;1]                  # Sampled time data
-    us = [-1,1]                 # Step function of square wave
+    us = [-1;1]                 # Step function of square wave
     T = 2                       # Period
     hMax = 7                    # Maximum harmonic number
     (h,f,a,b) = fourierSeriesStepReal(ts,us,2,hMax)
