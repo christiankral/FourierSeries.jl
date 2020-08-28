@@ -2,23 +2,24 @@
 
 This is a Julia package on the analysis and synthesis of Fourier series.
 The determination of Fourier coefficients is based on real value data.
-The Fourier coefficients may be calculated either real of complex. The module FourierSeries.jl is tested with Julia 0.6.2.
+The Fourier coefficients may be calculated either real of complex. The package FourierSeries.jl v0.2.0 is tested with Julia 1.5.0.
 
-The non-official package FourierSeries.jl can be installed by (has to be done only once):
+The official package FourierSeries.jl can be installed by
 
 ```julia
-Pkg.clone("git://github.com/christiankral/FourierSeries.jl.git")
+]
+add FourierSeries
+<Backspace>
 ```
 
 In order to update to the actual version of GitHub use:
 
 ```julia
-Pkg.update("FourierSeries")
+]
+update FourierSeries
 ```
 
 The module FourierSeries.jl has to be loaded by `using FourierSeries`.
-
-**Note:**  After updating to a newer version of FourierSeries.jl, the module can be reloaded without exiting the session by applying `reload("FourierSeries")`.
 
 # Analysis Functions
 
