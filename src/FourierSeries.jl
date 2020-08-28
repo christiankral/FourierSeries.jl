@@ -147,7 +147,7 @@ module FourierSeries
     # Fourier approximation of square wave form
     ts = [ 0; 1; 2; 3; 4; 5; 6; 7; 8; 9]    # Sampled time data
     us = [-1;-1;-1;-1;-1; 1; 1; 1; 1; 1]    # Step function of square wave
-    T = 2                       # Period
+    T = 1                       # Period
     hMax = 7                    # Maximum harmonic number
     (h,f,a,b) = fourierSeriesStepReal(ts,us,2,hMax)
     (t,u)=fourierSeriesSynthesisReal(f,a,b)
@@ -157,8 +157,7 @@ module FourierSeries
     step(tx,ux,where="post")    # Square wave function
     plot(t,u)                   # Fourier approximation up to hMax = 7
     ```
-
-"""
+    """
     function fourierSeriesSampledReal(t,u,hMax::Int64=typemax(Int64))
         # Check if vector u is NOT of type Complex
         if u[1] isa Complex
