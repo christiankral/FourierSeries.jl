@@ -142,11 +142,11 @@ module FourierSeries
         # Check if vectors f, a and b have equal lengths
         if length(f)!=length(a)
             error("module Fourier: function fourierSeriesSynthesisReal:\n
-    Vectors f and a have different lengths")
+    Vectors `f` and `a` have different lengths")
         end
         if length(a)!=length(b)
             error("module Fourier: function fourierSeriesSynthesisReal:\n
-    Vectors a and b have different lengths")
+    Vectors `a` and `b` have different lengths")
         end
         # Determine Period of synthesized function
         T = 1/f[2]
@@ -177,7 +177,7 @@ module FourierSeries
         # Check if vectors t and u have equal lengths
         if length(t)!=length(u)
             error("module Fourier: function repeatPeriodically:\n
-    Vectors t and u have different lengths")
+    Vectors `t` and `u` have different lengths")
         end
         # Determine length of arrays t and u
         N = length(t)
