@@ -14,8 +14,8 @@ module FourierSeries
 
     # Description
 
-    Calculates the real Fourier coefficients of a step function based on the
-    data pairs `t` and `u` according to the following variables
+    Calculates the real Fourier coefficients of a step function `u(t)` based on
+    the data pairs `t` and `u` according to the following variables:
 
     ```math
     \mathtt{a[k]} =
@@ -34,7 +34,7 @@ module FourierSeries
     `t` Time vector instances where a step occurs
 
     `u` Data vector of which Fourier coefficients shall be determined of, i.e.,
-    `u[k]` is the data value from the rigth at `t[k]`
+    `u[k]` is the data value from the right at `t[k]`
 
     `T` Time period of `u`
 
