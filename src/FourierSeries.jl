@@ -74,7 +74,7 @@ module FourierSeries
         # Check if t and have equal lengths
         if length(t)!=length(u)
             error("module FourierSeries: function fourierSeriesStepReal:\n
-    Vectors `t` and `u` have different lengths")
+    Vectors t and u have different lengths")
         end
         # Check if vector u is NOT of type Complex
         if u[1] isa Complex
