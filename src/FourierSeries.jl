@@ -177,7 +177,7 @@ module FourierSeries
             hMaxMax = div(N-1, 2)
         else
             # Number of sampled data, N, is even
-            hMaxMa x =div(N, 2)
+            hMaxMax = div(N, 2)
         end
         # Number of harmonics
         h = collect(0:hMaxMax)
@@ -219,6 +219,7 @@ module FourierSeries
             kRange = collect(1:min(hMax, length(a)-1))
         end
         # Calculate superosition
+        global u, a, b, T
         for k in kRange
             u = u + a[k+1] * cos.(k * t * 2 * pi / T)
                   + b[k+1] * sin.(k * t * 2 * pi / T)

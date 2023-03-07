@@ -2,6 +2,7 @@
 
 ## v0.2.1 2023-03-07
 - Minor fixing of documentation
+- Fix spacing error in code
 
 ## v0.2.0 2020-08-28
 
