@@ -62,8 +62,8 @@ module FourierSeries
     us = [-1; 1]                # Step function of square wave
     T = 2                       # Period
     hMax = 7                    # Maximum harmonic number
-    (h, f, a, b) = fourierSeriesStepReal(ts, us, 2, hMax)
-    (t, u)=fourierSeriesSynthesisReal(f, a, b)
+    (h, f, a, b) = fourierSeriesStepReal(ts, us, T, hMax)
+    (t, u) = fourierSeriesSynthesisReal(f, a, b)
     using PyPlot
     # Extend (t, u) by one element to right periodically
     (tx, ux) = repeatPeriodically(ts, us, right=1)
@@ -96,18 +96,17 @@ module FourierSeries
         b[1] = 0
         global a, b, τ, i, T
         for k in collect(1:hMax)
-            a[k+1] = sum(u.*(+sin.(k * τ[i.+1] * 2 * pi / T)
-                            .-sin.(k * τ[i] * 2 * pi / T))) / (k * pi)
-            b[k+1] = sum(u.*(-cos.(k * τ[i.+1] * 2 * pi / T)
-                            .+cos.(k * τ[i] * 2 * pi / T))) / (k * pi)
+            a[k+1] = sum(u .* (+sin.(k * τ[i .+ 1] * 2 * pi / T)
+                             .- sin.(k * τ[i] * 2 * pi / T))) / (k * pi)
+            b[k+1] = sum(u .* (-cos.(k * τ[i .+ 1] * 2 * pi / T)
+                             .+ cos.(k * τ[i] * 2 * pi / T))) / (k * pi)
         end
         # Number of harmonics
         h = collect(0:hMax)
         # Frequencies
         f = h / T
-        return (h,f,a,b)
+        return (h, f, a, b)
     end
-
     """
     # Function call
 
