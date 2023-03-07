@@ -71,7 +71,7 @@ module FourierSeries
     plot(t, u)                  # Fourier approximation up to hMax = 7
     ```
     """
-    function fourierSeriesStepReal(t,u,T,hMax)
+    function fourierSeriesStepReal(t, u, T, hMax)
         # Check if t and have equal lengths
         if length(t) != length(u)
             error("module FourierSeries: function fourierSeriesStepReal:\n
@@ -90,11 +90,12 @@ module FourierSeries
         # Cycle through loop to determine coefficients
         i = collect(1:N)
         # Time vector, extended by period T
-        τ = cat(t, [T+t[1]], dims = 1)
+        τ = cat(t, [T + t[1]], dims = 1)
         # DC value
         a[1] = sum(u .* (τ[i.+1] - τ[i])) / T
-        b[1] = 0
-        global a, b, τ, i, T
+        b[1] = 0.0
+        # Harmonic coefficiens
+        global a, b, τ, i
         for k in collect(1:hMax)
             a[k+1] = sum(u .* (+sin.(k * τ[i .+ 1] * 2 * pi / T)
                              .- sin.(k * τ[i] * 2 * pi / T))) / (k * pi)
