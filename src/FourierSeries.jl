@@ -220,10 +220,10 @@ module FourierSeries
             kRange = collect(1:min(hMax, length(a)-1))
         end
         # Calculate superosition
-        global u, a, b, T
+        global u, T
         for k in kRange
-            u = u + a[k+1] * cos.(k * t * 2 * pi / T)
-                  + b[k+1] * sin.(k * t * 2 * pi / T)
+            u = u + a[k+1] * cos.(k * t * 2 * pi / T) +
+                    b[k+1] * sin.(k * t * 2 * pi / T)
         end
         return (t, u)
     end

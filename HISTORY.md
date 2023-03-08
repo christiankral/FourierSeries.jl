@@ -1,5 +1,8 @@
 # History.md
 
+## v0.2.3 2023-03-08
+- Fix syntax problem in Fourier synthesis
+
 ## v0.2.2 2023-03-07
 - Fix error in global variable T, which is propagated as function parameter and
   must thus not be global
