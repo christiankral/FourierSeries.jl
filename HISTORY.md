@@ -1,5 +1,8 @@
 # History.md
 
+## v0.2.4 2023-03-15
+- Fix array size mismatch
+
 ## v0.2.3 2023-03-08
 - Fix syntax problem in Fourier synthesis
 

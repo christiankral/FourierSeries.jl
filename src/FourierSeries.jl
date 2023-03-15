@@ -183,10 +183,12 @@ module FourierSeries
         # Number of harmonics
         h = collect(0:hMaxMax)
         # Frequencies
-        f = h / T
+        f = h[1:min(hMax,hMaxMax) + 1] / T
         # Real and imaginary coefficients
         a = +real(c[1:min(hMax,hMaxMax) + 1])
         b = -imag(c[1:min(hMax,hMaxMax) + 1])
+        # Resize vector h
+        h = h[1:min(hMax,hMaxMax) + 1]
         # Return vectors
         return (h, f, a, b)
     end

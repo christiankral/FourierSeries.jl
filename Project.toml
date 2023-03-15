@@ -1,7 +1,7 @@
 name = "FourierSeries"
 uuid = "91b0b092-f7f9-44d0-82ad-103031573311"
 authors = ["Christian Kral <dr.christian.kral@gmail.com>"]
-version = "0.2.3"
+version = "0.2.4"
 
 [deps]
 FFTW = "7a1cc6ca-52ef-59f5-83cd-3a7055c09341"
